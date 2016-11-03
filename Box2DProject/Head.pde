@@ -4,17 +4,18 @@ class Head extends Entity
   Head(float _x, float _y, PImage _img)
   {
     super(_x, _y, _img);
-    super.CreateBody(BodyType.DYNAMIC, 1, 0, 0);
+    super.CreateBody(BodyType.DYNAMIC, random(0,2), 0, 5);
     super.body.setUserData(this);
+    //body.setGravityScale(0);
   }
   public void update()
   {
     PVector pos = box2d.getBodyPixelCoordPVector(body);
     Vec2 currentVelocity = super.body.getLinearVelocity();
-    if (mousePressed)
+    if (!outwards)
     {
-      velocity.x=mouseX-pos.x;
-      velocity.y=pos.y-mouseY;
+      velocity.x=width/2-pos.x;
+      velocity.y=pos.y-height/2;
       currentVelocity.x = velocity.x;
       currentVelocity.y = velocity.y;
     }
